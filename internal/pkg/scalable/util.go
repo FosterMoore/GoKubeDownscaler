@@ -21,6 +21,9 @@ const (
 	deploymentGroupVersion      = "apps/v1"
 	deploymentKind              = "Deployment"
 	autoscalingRunnerSetKind    = "AutoscalingRunnerSet"
+	cnpgGroup                   = "postgresql.cnpg.io"
+	cnpgVersion                 = "v1"
+	cnpgClusterKind             = "Cluster"
 	cronJobKind                 = "CronJob"
 	daemonSetKind               = "DaemonSet"
 	gatewayKind                 = "Gateway"
@@ -35,6 +38,9 @@ const (
 	podDisruptionBudgetKind     = "PodDisruptionBudget"
 	postgresqlKind              = "postgresql" // lowercase for postgresqlKind is intentional
 	prometheusKind              = "Prometheus"
+	rabbitmqGroup               = "rabbitmq.com"
+	rabbitmqVersion             = "v1beta1"
+	rabbitmqClusterKind         = "RabbitmqCluster"
 	rolloutKind                 = "Rollout"
 	scaledObjectKind            = "ScaledObject"
 	serviceKind                 = "Service"
@@ -296,6 +302,7 @@ func isWorkloadExcluded(
 func isSupportedOwnerKind(kind string) bool {
 	supportedOwnerKinds := map[string]struct{}{
 		autoscalingRunnerSetKind:    {},
+		cnpgClusterKind:             {},
 		cronJobKind:                 {},
 		daemonSetKind:               {},
 		deploymentKind:              {},
@@ -309,6 +316,7 @@ func isSupportedOwnerKind(kind string) bool {
 		podDisruptionBudgetKind:     {},
 		postgresqlKind:              {},
 		prometheusKind:              {},
+		rabbitmqClusterKind:         {},
 		rolloutKind:                 {},
 		scaledObjectKind:            {},
 		serviceKind:                 {},

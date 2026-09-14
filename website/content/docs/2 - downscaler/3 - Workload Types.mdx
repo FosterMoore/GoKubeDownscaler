@@ -159,6 +159,31 @@ be provisioned by a cluster administrator having the necessary cluster-wide perm
 
 Scales by setting the numberOfInstances count to the [downscale replicas](ref:docs-values#downscale-replicas).
 
+### RabbitmqClusters
+
+- id: rabbitmqclusters
+- resource: rabbitmqcluster.v1beta1.rabbitmq.com
+
+Scales by setting the replica count to the [downscale replicas](ref:docs-values#downscale-replicas).
+Requires the [RabbitMQ Cluster Operator](https://github.com/rabbitmq/cluster-operator).
+The operator supports `replicas: 0` natively: it records the previous count in the
+`rabbitmq.com/before-zero-replicas-configured` annotation and only accepts that count when
+scaling back up, which is the value the downscaler restores.
+The StatefulSet the operator creates is owned by the RabbitmqCluster and is left alone.
+
+### CnpgClusters
+
+- id: cnpgclusters
+- resource: cluster.v1.postgresql.cnpg.io
+
+Suspends by setting the operator's declarative hibernation annotation
+`cnpg.io/hibernation` to `on`, and resumes by setting it to `off`.
+Requires the [CloudNativePG operator](https://github.com/cloudnative-pg/cloudnative-pg).
+On the way down the operator deletes the instance pods (replicas first, primary last) while
+retaining the PVCs, so data survives; on the way up it recreates the pods.
+This is a suspend-shaped workload, not a replica-shaped one: the operator owns the instance
+count and the downscaler only toggles hibernation.
+
 ### KafkaConnects
 
 - id: kafkaconnects

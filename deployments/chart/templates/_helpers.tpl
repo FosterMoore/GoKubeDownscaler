@@ -357,6 +357,26 @@ Create defined permissions for roles
     - list
     - update
 {{- end }}
+{{- if eq $resource "rabbitmqclusters" }}
+- apiGroups:
+    - rabbitmq.com
+  resources:
+    - rabbitmqclusters
+  verbs:
+    - get
+    - list
+    - update
+{{- end }}
+{{- if eq $resource "cnpgclusters" }}
+- apiGroups:
+    - postgresql.cnpg.io
+  resources:
+    - clusters
+  verbs:
+    - get
+    - list
+    - update
+{{- end }}
 {{- if eq $resource "kafkaconnects" }}
 - apiGroups:
     - kafka.strimzi.io
@@ -606,6 +626,28 @@ Create webhook resources
     - "UPDATE"
   resources:
     - postgresqls
+{{ end -}}
+{{ if eq $resource "rabbitmqclusters" -}}
+- apiGroups:
+    - rabbitmq.com
+  apiVersions:
+    - "*"
+  operations:
+    - "CREATE"
+    - "UPDATE"
+  resources:
+    - rabbitmqclusters
+{{ end -}}
+{{ if eq $resource "cnpgclusters" -}}
+- apiGroups:
+    - postgresql.cnpg.io
+  apiVersions:
+    - "*"
+  operations:
+    - "CREATE"
+    - "UPDATE"
+  resources:
+    - clusters
 {{ end -}}
 {{- if or (eq $resource "services") (eq $resource "awselbservices") (eq $resource "awsnlbservices")}}
 - apiGroups:
@@ -938,6 +980,32 @@ resources include in annotationsCompliance
     - "UPDATE"
   resources:
     - postgresqls
+{{ end -}}
+{{ if eq $resource "rabbitmqclusters" -}}
+- apiGroups:
+    - rabbitmq.com
+  apiVersions:
+    - "*"
+  operations:
+  {{- if $createUpdate }}
+    - "CREATE"
+  {{- end }}
+    - "UPDATE"
+  resources:
+    - rabbitmqclusters
+{{ end -}}
+{{ if eq $resource "cnpgclusters" -}}
+- apiGroups:
+    - postgresql.cnpg.io
+  apiVersions:
+    - "*"
+  operations:
+  {{- if $createUpdate }}
+    - "CREATE"
+  {{- end }}
+    - "UPDATE"
+  resources:
+    - clusters
 {{ end -}}
 {{ if eq $resource "kafkaconnects" -}}
 - apiGroups:
