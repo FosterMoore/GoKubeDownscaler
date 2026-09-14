@@ -20,6 +20,9 @@ const (
 	annotationOriginalReplicas  = "downscaler/original-replicas"
 	deploymentGroupVersion      = "apps/v1"
 	deploymentKind              = "Deployment"
+	elasticsearchGroup          = "elasticsearch.k8s.elastic.co"
+	elasticsearchVersion        = "v1"
+	elasticsearchKind           = "Elasticsearch"
 	autoscalingRunnerSetKind    = "AutoscalingRunnerSet"
 	cnpgGroup                   = "postgresql.cnpg.io"
 	cnpgVersion                 = "v1"
@@ -35,6 +38,13 @@ const (
 	kafkaBridgeKind             = "KafkaBridge"
 	kafkaConnectKind            = "KafkaConnect"
 	kafkaMirrorMaker2Kind       = "KafkaMirrorMaker2"
+	mongoDBCommunityGroup       = "mongodbcommunity.mongodb.com"
+	mongoDBCommunityVersion     = "v1"
+	mongoDBCommunityKind        = "MongoDBCommunity"
+	redisGroup                  = "redis.redis.opstreelabs.in"
+	redisVersion                = "v1beta2"
+	redisReplicationKind        = "RedisReplication"
+	redisSentinelKind           = "RedisSentinel"
 	podDisruptionBudgetKind     = "PodDisruptionBudget"
 	postgresqlKind              = "postgresql" // lowercase for postgresqlKind is intentional
 	prometheusKind              = "Prometheus"
@@ -305,6 +315,7 @@ func isSupportedOwnerKind(kind string) bool {
 		cnpgClusterKind:             {},
 		cronJobKind:                 {},
 		daemonSetKind:               {},
+		elasticsearchKind:           {},
 		deploymentKind:              {},
 		gatewayKind:                 {},
 		horizontalPodAutoscalerKind: {},
@@ -313,6 +324,9 @@ func isSupportedOwnerKind(kind string) bool {
 		kafkaBridgeKind:             {},
 		kafkaConnectKind:            {},
 		kafkaMirrorMaker2Kind:       {},
+		mongoDBCommunityKind:        {},
+		redisReplicationKind:        {},
+		redisSentinelKind:           {},
 		podDisruptionBudgetKind:     {},
 		postgresqlKind:              {},
 		prometheusKind:              {},

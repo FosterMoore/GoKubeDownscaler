@@ -1,3 +1,4 @@
+//nolint:dupl // suspend-shaped scaler tests share a near-identical table shape
 package scalable
 
 import (
